@@ -18,36 +18,30 @@ from django.contrib.auth.models import User
 class CreateUserProfile(generics.CreateAPIView):
     queryset=userProfile.objects.all()
     serializer_class= userProfileSerializer
-    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         if self.request.data:
             data = self.request.data
             data_dict = dict(data)
             username= data_dict['username']
-            print(username[0])
             email = data_dict['email']
-            print(email[0])
             password = data_dict['password']
             if not User.objects.filter(username=username[0]).exists():
                 user = User.objects.create(username=username[0],email=email[0],password=password[0])
                 serializer.save(user=user)
 
-
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
-        if response.status_code == 201:
-            return Response({
-                'message': 'Username already taken,Please choose another one',
-
-            })
-        else:
+        user  = response.data['username']
+        user = User.objects.get(username=user)
+        token = Token.objects.get(user=user)
+        if response:
             return Response({
                 'message': 'User created',
-                "data": response.data
+                "data": response.data,
+                "token" : token.key
 
             })
-
 
 
 class userProfileDetailView(RetrieveUpdateDestroyAPIView):
