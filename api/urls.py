@@ -27,6 +27,4 @@ urlpatterns = [
     #see all user profiles
     path("profiles/",views.ProfilesTypeList.as_view(), name="profiles"),
 
-    #get jwt token, its accept twp params username and passowrd
-    path('get_auth_token/', rest_framework_views.obtain_auth_token, name='get_auth_token'),
 ]

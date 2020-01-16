@@ -9,6 +9,7 @@ class userProfile(models.Model):
         ('IS_BOOK', 'BOOK STATUS'),
         ('IS_POST', 'POST STATUS')
     ]
+    id = models.AutoField(primary_key=True)
     user=models.OneToOneField(User,on_delete=models.CASCADE,related_name="profile")
     username = models.CharField( max_length=128)
     password = models.CharField( max_length=128)

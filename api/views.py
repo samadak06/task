@@ -25,10 +25,29 @@ class CreateUserProfile(generics.CreateAPIView):
             data = self.request.data
             data_dict = dict(data)
             username= data_dict['username']
+            print(username[0])
             email = data_dict['email']
+            print(email[0])
             password = data_dict['password']
-            user = User.objects.create(username=username,email=email,password=password)
-            serializer.save(user=user)
+            if not User.objects.filter(username=username[0]).exists():
+                user = User.objects.create(username=username[0],email=email[0],password=password[0])
+                serializer.save(user=user)
+
+
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)
+        if response.status_code == 201:
+            return Response({
+                'message': 'Username already taken,Please choose another one',
+
+            })
+        else:
+            return Response({
+                'message': 'User created',
+                "data": response.data
+
+            })
+
 
 
 class userProfileDetailView(RetrieveUpdateDestroyAPIView):
@@ -58,7 +77,6 @@ class LuggageTypeDetail(generics.RetrieveUpdateDestroyAPIView):
 class LuggageTypeCreate(generics.CreateAPIView):
     queryset = LuggageType.objects.all()
     serializer_class = LuggageTypeSerializer
-
 
     def create(self, request, *args, **kwargs):
         if self.request.user.is_authenticated and self.request.user.is_staff:
@@ -137,17 +155,4 @@ def home(request):
     return render(request,"home.html",)
 
 
-
-def get_auth_token(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        # the password verified for the user
-        if user.is_active:
-            token, created = Token.objects.get_or_create(user=user)
-            print(token.key)
-            request.session['auth'] = token.key
-            return redirect('/', request)
-    return redirect(settings.LOGIN_REDIRECT_URL, request)
 

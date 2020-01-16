@@ -23,6 +23,7 @@ class BookingSerializer(serializers.ModelSerializer):
 
 class userProfileSerializer(serializers.ModelSerializer):
 
+    password = serializers.CharField(write_only=True)
     class Meta:
         model=models.userProfile
         fields = ('username', 'email', 'password',)
