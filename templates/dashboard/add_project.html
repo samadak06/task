@@ -1,0 +1,125 @@
+{% extends 'base.html'%}
+     {% block main %}
+{% load static %}
+    <main class="app-content">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="tile">
+            <h6 class="tile-title">{{ title }}</h6>
+            <div class="tile-body">
+              <form class="ajax reset {% if redirect %} redirect {% endif %}" action="{{ url }}" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                <div class="form-group">
+                  <label class="control-label" for="{{ 'form.client_name.id_for_label' }}">{{ form.client_name.label }}</label>
+                  {{ form.client_name }}
+                </div>
+                 <div class="form-group">
+                  <label class="control-label" for="{{ 'form.phone.id_for_label' }}">{{ form.phone.label }}</label>
+                  {{ form.phone }}
+                </div>
+                 <div class="form-group">
+                  <label class="control-label" for="{{ 'form.email.id_for_label' }}">{{ form.email.label }}</label>
+                  {{ form.email}}
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="{{ 'form.address.id_for_label' }}">{{ form.address.label }}</label>
+                  {{ form.address }}
+                </div>
+                 <div class="form-group">
+                 <div class="toggle">
+                     <label style="margin-right:61px" class="control-label" for="{{ 'form.service.id_for_label' }}">{{ form.service.label }}:</label>
+                 <label>
+                    {{ form.service }}<span class="button-indecator"></span>
+                  </label>
+                 </div>
+                 <div class="toggle">
+                     <label  style="margin-right:25px"  class="control-label" for="{{ 'form.construction.id_for_label' }}">{{ form.construction.label }}:</label>
+                     <label>
+                          {{ form.construction }}<span class="button-indecator"></span>
+                     </label>
+                 </div>
+                      <div class="toggle">
+                      <label style="margin-right:61px" class="control-label" for="{{ 'form.interior.id_for_label' }}">{{ form.interior.label }}:</label>
+                      <label>
+                          {{ form.interior }}<span class="button-indecator"></span>
+                     </label>
+                    </div>
+                 </div>
+                 <div class="form-group">
+                  <label class="control-label" for="{{ 'form.date.id_for_label' }}">{{ form.date.label }}</label>
+                  {{ form.date }}
+                </div>
+                </div>
+            </div>
+
+         </div>
+        <div class="col-md-6">
+          <div class="tile">
+                <h6 class="tile-title"></h6>
+            <div class="tile-body">
+
+                   <div class="form-group">
+                  <label class="control-label" for="{{ 'form.square_feet.id_for_label' }}">{{ form.square_feet.label }}</label>
+                  {{ form.square_feet }}
+                </div>
+                 <div class="form-group">
+                  <label class="control-label" for="{{ 'form.rate_per_sqft.id_for_label' }}">{{ form.rate_per_sqft.label }}</label>
+                  {{ form.rate_per_sqft }}
+                </div>
+                 <div class="form-group">
+                  <label class="control-label" for="{{ 'form.amount.id_for_label' }}">{{ form.amount.label }}</label>
+                  {{ form.amount }}
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="{{ 'form.status.id_for_label' }}">{{ form.status.label }}</label>
+                  {{ form.status}}
+                </div>
+
+<!--                 <div class="form-group">-->
+<!--                    {{ form.files }}-->
+<!--&lt;!&ndash;                    <button type="button" class=" btn btn-primary js-upload-photos">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span class="fa fa-fw fa-lg fa-check-circle"></span> Upload photos&ndash;&gt;-->
+<!--&lt;!&ndash;                    </button>&ndash;&gt;-->
+<!--&lt;!&ndash;                     <table id="gallery" class="table table-bordered">&ndash;&gt;-->
+<!--&lt;!&ndash;                      <thead>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </thead>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <tbody>&ndash;&gt;-->
+<!--&lt;!&ndash;                        {% for photo in photos %}&ndash;&gt;-->
+<!--&lt;!&ndash;                          <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td><a href="{{ photo.file.url }}">{{ photo.file.name }}</a></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                          </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        {% endfor %}&ndash;&gt;-->
+<!--&lt;!&ndash;                      </tbody>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </table>&ndash;&gt;-->
+
+<!--                </div>-->
+            </div>
+            <div class="tile-footer">
+              <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="{% url 'projects' %}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+            </div>
+              </form>
+          </div>
+        </div>
+      </div>
+<!--      </div>-->
+<!--        <div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">-->
+<!--  <div class="modal-dialog">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h4 class="modal-title">Uploading...</h4>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <div class="progress">-->
+<!--          <div class="progress-bar" role="progressbar" style="width: 0%;">0%</div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--        {# 3. TABLE TO DISPLAY THE UPLOADED PHOTOS #}-->
+
+    </main>
+
+
+
+{% endblock %}

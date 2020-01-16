@@ -1,0 +1,290 @@
+{% extends 'base.html'%}
+     {% block main %}
+        {% load main_tags %}
+    <main class="app-content">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="tile">
+            <h6 class="tile-title">{{ instance.client_name }}</h6>
+            <div class="tile-body">
+              <form>
+                  {% csrf_token %}
+                <div class="form-group">
+                  <label class="control-label" for="{{ 'form.client_name.id_for_label' }}">{{ form.client_name.label }}</label>
+                  <input class="form-control form-control-sm" readonly="True" value="{{ instance.client_name }}" type="text">
+                </div>
+                 <div class="form-group">
+                  <label class="control-label" for="{{ 'form.phone.id_for_label' }}">{{ form.phone.label }}</label>
+                  <input class="form-control form-control-sm" readonly="True" value="{{ instance.phone }}" type="text">
+                </div>
+                 <div class="form-group">
+                  <label class="control-label" for="{{ 'form.email.id_for_label' }}">{{ form.email.label }}</label>
+                  <input class="form-control form-control-sm" readonly="True" value="{{ instance.email }}" type="text">
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="{{ 'form.address.id_for_label' }}">{{ form.address.label }}</label>
+                  <input class="form-control form-control-sm" readonly="True" value="{{ instance.address }}" type="text">
+                </div>
+                 <div class="form-group">
+                 <div class="toggle">
+                     <label style="margin-right:61px" class="control-label" for="{{ 'form.service.id_for_label' }}">{{ form.service.label }}:</label>
+
+                  <label>
+                      {% if instance.service %}
+                    <input type="checkbox"  checked="" ><span class="button-indecator"></span>
+                      {% else %}
+                      <input type="checkbox"  checked="" ><span class="button-indecator"></span>
+                      {% endif %}
+                  </label>
+                 </div>
+                 <div class="toggle">
+                     <label  style="margin-right:25px"  class="control-label" for="{{ 'form.construction.id_for_label' }}">{{ form.construction.label }}:</label>
+                     <label>
+                    <input type="checkbox" checked="" ><span class="button-indecator"></span>
+                  </label>
+                 </div>
+                      <div class="toggle">
+                      <label style="margin-right:61px" class="control-label" for="{{ 'form.interior.id_for_label' }}">{{ form.interior.label }}:</label>
+                      <label>
+                    <input type="checkbox" checked="" ><span class="button-indecator"></span>
+                  </label>
+                    </div>
+                 </div>
+                 <div class="form-group">
+                  <label class="control-label" for="{{ 'form.date.id_for_label' }}">{{ form.date.label }}</label>
+
+                    <input type="text" value="{{ instance.date }}" class="form-control form-control-sm" readonly="True" >
+
+                </div>
+                </div>
+            </div>
+
+         </div>
+        <div class="col-md-6">
+          <div class="tile" >
+                <div class="tile-title" style="text-align: -webkit-right;">
+                </div>
+            <div class="tile-body">
+                <div class="form-group" style="text-align: -webkit-right;">
+                            <a title="Edit Project" href="{% url 'edit_project' pk=instance.pk %}"  data-title="Are you sure?">
+                                <i  class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </a>
+                       <a title="Delete Project" data-id="{{instance.pk}}" data-text="{{confirm_delete_message}}" data-title="Are you sure?" href="{% url 'delete_project' pk=instance.pk %}" class="action-button redirect">
+                               <i class="fa fa-fw fa-lg fa fa-trash-o"></i></a>
+
+                </div>
+                   <div class="form-group" >
+                  <label class="control-label" for="{{ 'form.square_feet.id_for_label' }}">{{ form.square_feet.label }}</label>
+                  <input type="text" value="{{ instance.square_feet }}" class="form-control form-control-sm" readonly="True" >
+                </div>
+                 <div class="form-group">
+                  <label class="control-label" for="{{ 'form.rate_per_sqft.id_for_label' }}">{{ form.rate_per_sqft.label }}</label>
+                  <input type="text" value="{{ instance.rate_per_sqft }}" class="form-control form-control-sm" readonly="True" >
+                </div>
+                 <div class="form-group">
+                  <label class="control-label" for="{{ 'form.amount.id_for_label' }}">{{ form.amount.label }}</label>
+                 <input type="text" value="{{ instance.amount }}" class="form-control form-control-sm" readonly="True" >
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="">Paid</label>
+                 <input type="text" value="" class="form-control form-control-sm" readonly="True" >
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="">Balance</label>
+                 <input type="text" value="" class="form-control form-control-sm" readonly="True" >
+                </div>
+                 <div class="form-group">
+                  <label class="control-label" for="">Expense</label>
+                 <input type="text" value="" class="form-control form-control-sm" readonly="True" >
+                </div>
+                 <div class="form-group">
+                  <label class="control-label" for="">Income</label>
+                 <input type="text" value="" class="form-control form-control-sm" readonly="True" >
+                </div>
+
+
+
+
+
+<!--                <div class="form-group">-->
+<!--                  <label class="control-label" for="{{ 'form.files.id_for_label' }}">{{ form.files.label }}</label>-->
+
+<!--                </div>-->
+<!--                  <div class="col-md-12" >-->
+<!--                      &lt;!&ndash; Slideshow container &ndash;&gt;-->
+<!--                      {% if instance.files %}-->
+<!--                    <div class="slideshow-container">-->
+
+<!--                      &lt;!&ndash; Full-width images with number and caption text &ndash;&gt;-->
+<!--                      <div class="mySlides ">-->
+<!--                        <img id="myImg" src="{{ instance.files.url }}" style="height:209px;width:100%">-->
+<!--                      </div>-->
+
+<!--                      &lt;!&ndash; Next and previous buttons &ndash;&gt;-->
+<!--&lt;!&ndash;                      <a  class="btn btn-primary" onclick="plusSlides(-1)"><i class="fa fa-fw fa-lg fa-check-circle"></i></a>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <a class="btn btn-primary" onclick="plusSlides(1)"><i class="fa fa-fw fa-lg fa-check-circle"></i></a>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                      {% endif %}-->
+<!--                  </div>-->
+             </form>
+            </div>
+<!--            <div class="tile-footer">-->
+<!--              <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>-->
+<!--            </div>-->
+
+          </div>
+        </div>
+      </div>
+      </div>
+    </main>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- The Close Button -->
+
+
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img01">
+
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+    <span class="close">&times;</span>
+</div>
+<script>
+<!--var slideIndex = 1;-->
+<!--showSlides(slideIndex);-->
+
+<!--// Next/previous controls-->
+<!--function plusSlides(n) {-->
+<!--  showSlides(slideIndex += n);-->
+<!--}-->
+
+<!--// Thumbnail image controls-->
+<!--function currentSlide(n) {-->
+<!--  showSlides(slideIndex = n);-->
+<!--}-->
+
+<!--function showSlides(n) {-->
+<!--  var i;-->
+<!--  var slides = document.getElementsByClassName("mySlides");-->
+<!--  var dots = document.getElementsByClassName("dot");-->
+<!--  if (n > slides.length) {slideIndex = 1}-->
+<!--  if (n < 1) {slideIndex = slides.length}-->
+<!--  for (i = 0; i < slides.length; i++) {-->
+<!--      slides[i].style.display = "none";-->
+<!--  }-->
+<!--  for (i = 0; i < dots.length; i++) {-->
+<!--      dots[i].className = dots[i].className.replace(" active", "");-->
+<!--  }-->
+<!--  slides[slideIndex-1].style.display = "block";-->
+<!--&lt;!&ndash;&lt;!&ndash;  dots[slideIndex-1].className += " active";&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--// Get the modal-->
+<!--var modal = document.getElementById("myModal");-->
+
+<!--// Get the image and insert it inside the modal - use its "alt" text as a caption-->
+<!--var img = document.getElementById("myImg");-->
+<!--var modalImg = document.getElementById("img01");-->
+<!--var captionText = document.getElementById("caption");-->
+<!--img.onclick = function(){-->
+<!--  modal.style.display = "block";-->
+<!--  modalImg.src = this.src;-->
+<!--  captionText.innerHTML = this.alt;-->
+<!--}-->
+
+<!--// Get the <span> element that closes the modal-->
+<!--var span = document.getElementsByClassName("close")[0];-->
+
+<!--// When the user clicks on <span> (x), close the modal-->
+<!--span.onclick = function() {-->
+<!--  modal.style.display = "none";-->
+<!--}-->
+</script>
+<style>
+    * Style the Image Used to Trigger the Modal */
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#img01 {
+  height:100%;
+
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 91px;
+  right: 378px;
+  color: #000;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  back-ground:#fff;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+</style>
+{% endblock %}

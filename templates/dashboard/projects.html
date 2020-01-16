@@ -1,0 +1,67 @@
+{% extends 'base.html'%}
+     {% block main %}
+    <main class="app-content">
+      <div class="app-title">
+        <div>
+          <h3><i class="fa fa-th-list"></i> Projects Information's {{ instances.instance.date }}</h3>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <table class="table table-hover table-bordered" id="sampleTable">
+                <thead>
+                  <tr>
+                    <th>Project</th>
+                    <th>Date</th>
+                    <th>Service</th>
+                    <th>Construction</th>
+                    <th>Interior</th>
+                    <th>Toatal Amount</th>
+                    <th>Paid</th>
+                    <th>Balance</th>
+                    <th>Expense</th>
+                    <th>Income</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for instance in instances %}
+                  <tr>
+                   <td> <a href="{% url 'view_project' pk=instance.pk  %}">{{ instance.client_name }}</a></td>
+                    <td>{{ instance.date }}</td>
+                    {% if instance.service %}
+                      <td><i class="fa fa fa-check"></i> </td>
+                      {% else %}
+                      <td><i class="fa fa-times"></i> </td>
+                    {% endif %}
+                    {% if instance.construction %}
+                      <td><i class="fa fa fa-check"></i> </td>
+                      {% else %}
+                      <td><i class="fa fa-times"></i> </td>
+                    {% endif %}
+                    {% if instance.interior %}
+                      <td><i class="fa fa fa-check"></i> </td>
+                      {% else %}
+                      <td><i class="fa fa-times"></i> </td>
+                    {% endif %}
+                    <td>{{instance.amount}}</td>
+                    <td>Paid</td>
+                    <td>Balance</td>
+                      <td><a href="">Expense</a></td>
+                    <td>Income</td>
+                     <td>Status</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+{% endblock %}
