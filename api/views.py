@@ -78,7 +78,7 @@ class LuggageTypeCreate(generics.CreateAPIView):
     queryset = LuggageType.objects.all()
     serializer_class = LuggageTypeSerializer
     permission_classes = [IsAuthenticated, ]
-    
+
     def create(self, request, *args, **kwargs):
         if self.request.user.is_authenticated and self.request.user.is_staff:
             response = super().create(request, *args, **kwargs)

@@ -142,3 +142,12 @@ LOGOUT_REDIRECT_URL = '/'
 # LOGIN_URL = 'login/'
 
 # LOGIN_URL = '/accounts/auth/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
